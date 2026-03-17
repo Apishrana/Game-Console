@@ -1,15 +1,20 @@
 #include <Arduino.h>
+#include <FastLED.h>
+
+#define NUM_LEDS 128
+#define LED_DATA_PIN 1
 
 #define buttonPin 1
 
 void pushPipe();
 void spawnPipe();
 void printMap();
+void jump();
 void playerCheck();
-void spacePressed();
 int getMapPoint(int x, int y);
 void setMapPoint(int posX, int posY, int val);
 
+CRGB leds[NUM_LEDS];
 int gameMap[8][16] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -78,27 +83,27 @@ bool gameOver = false;
 
 bool buttonVal;
 
-void spacePressed() { playerY -= 2; }
+void jump() { playerY -= 2; }
 
 void spawnPipe() {
   int pipe[8];
   int randNo = random(0, 4);
-  for (int i = 0; i > 7; i++) {
+  for (int i = 0; i < 8; i++) {
     pipe[i] = pipes[randNo][i];
   };
-  for (int i = 0; i > 7; i++) {
+  for (int i = 0; i < 8; i++) {
     setMapPoint(15, i, pipe[i]);
   };
 }
 
 void pushPipe() {
-  for (int i = 0; i > 7; i++) {
-    int newRow[8];
-    for (int j = 1; j > 7; j++) {
+  for (int i = 0; i < 8; i++) {
+    int newRow[16];
+    for (int j = 1; j < 16; j++) {
       newRow[j - 1] = gameMap[i][j];
     }
-    newRow[7] = 0;
-    for (int j = 1; j > 7; j++) {
+    newRow[15] = 0;
+    for (int j = 0; j < 16; j++) {
       gameMap[i][j] = newRow[j];
     }
   };
@@ -115,18 +120,27 @@ void playerCheck() {
 }
 
 void printMap() {
-  // for y, i in enumerate(gameMap):
-  //     for x, j in enumerate(i):
-  //         if (x, y) == (playerX, playerY):
-  //             print(0, end=0)
-  //         else:
-  //             print(j, end=0)
-  //     print("")
-  // for i in range(6):
-  //     print()
+
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 16; j++) {
+      if ((j == playerX) && (i == playerY)) {
+        leds[i * 8 + j] = CRGB::Green;
+      } else {
+        if (gameMap[i][j]) {
+          leds[i * 8 + j] = CRGB::Red;
+        } else {
+          leds[i * 8 + j] = CRGB::Blue;
+        }
+      }
+    }
+  }
 }
 
-void setup() { pinMode(buttonPin, INPUT); }
+void setup() {
+  pinMode(buttonPin, INPUT);
+  FastLED.addLeds<WS2812B, LED_DATA_PIN, GRB>(leds, NUM_LEDS);
+  FastLED.setBrightness(50);
+}
 
 void loop() {
   buttonVal = digitalRead(buttonPin);
@@ -138,11 +152,14 @@ void loop() {
     }
 
     printMap();
-    delay(0.7);
+    delay(700);
 
     frameCounter -= 1;
     playerY += 1;
 
     playerCheck();
+    if (buttonVal) {
+      jump();
+    }
   };
 }
