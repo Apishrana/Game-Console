@@ -1,5 +1,3 @@
-# flappy bird
-
 from time import sleep
 from random import randint
 
@@ -125,5 +123,5 @@ while not gameOver:
     playerY += 1
 
     playerCheck()
-    if input()==' ':
+    if input() == " ":
         spacePressed()
