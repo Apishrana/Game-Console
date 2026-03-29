@@ -1,9 +1,6 @@
 from time import sleep
 from random import randint
 
-# funcs
-
-
 def spacePressed():
     global playerY
     playerY -= 2
