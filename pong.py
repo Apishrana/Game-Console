@@ -28,21 +28,28 @@ def playerSetup():
 
 
 def updateBall():
-    global gameOver
-    if [ballPos[0] + ballVelocity[0], ballPos[1] + ballVelocity[1]] in pl1:
+    nextX = ballPos[0] + ballVelocity[0]
+    nextY = ballPos[1] + ballVelocity[1]
+
+    if nextX == 1 and any(p[1] == nextY for p in pl1):
         ballVelocity[0] = 1
-    if [ballPos[0] + ballVelocity[0], ballPos[1] + ballVelocity[1]] in pl2:
+    if nextX == 14 and any(p[1] == nextY for p in pl2):
         ballVelocity[0] = -1
     setMapPoint(ballPos, "0")
     ballPos[0] += ballVelocity[0]
     ballPos[1] += ballVelocity[1]
-    setMapPoint(ballPos, "X")
-    if ballPos[0] == 15 or ballPos[0] == 0:
-        gameOver = True
+    if ballPos[0] >= 15:
+        playerScore(1)
+        return
+    if ballPos[0] <= 0:
+        playerScore(2)
+        return
+
     if ballPos[1] == 7:
         ballVelocity[1] = -1
-    if ballPos[1] == 0:
+    if ballPos[1] == 1:
         ballVelocity[1] = 1
+    setMapPoint(ballPos, "X")
 
 
 def movePl1(dir):
@@ -51,7 +58,7 @@ def movePl1(dir):
     if dir == 0 and pl1[2][1] != 7:
         for i in range(3):
             pl1[i][1] += 1
-    elif dir == 1 and pl1[2][1] != 0:
+    elif dir == 1 and pl1[0][1] != 1:
         for i in range(3):
             pl1[i][1] -= 1
 
@@ -62,19 +69,51 @@ def movePl2(dir):
     if dir == 0 and pl2[2][1] != 7:
         for i in range(3):
             pl2[i][1] += 1
-    elif dir == 1 and pl2[2][1] != 0:
+    elif dir == 1 and pl2[0][1] != 1:
         for i in range(3):
             pl2[i][1] -= 1
+
+
+def setupBall():
+    global ballPos, ballVelocity
+    setMapPoint(ballPos, "0")
+    ballPos = ballPosList[randint(0, 1)].copy()
+    ballVelocity = ballVelDic[ballPosList.index(ballPos)]
+    print(ballPos)
+    setMapPoint(ballPos, "X")
+
+
+def playerScore(player):
+    global pl2Score, pl1Score, gameOver
+    if player == 1:
+        pl1Score += 1
+    if player == 2:
+        pl2Score += 1
+    setupBall()
+    displayScore()
+    if pl1Score == 9:
+        gameOver = True
+    if pl2Score == 9:
+        gameOver = True
+
+
+def displayScore():
+    for i in range(pl1Score):
+        setMapPoint([i, 0], "9")
+    for i in range(pl2Score):
+        setMapPoint([15 - i, 0], "9")
 
 
 gameMap = [["0" for i in range(16)] for i in range(8)]
 gameOver = False
 pl1 = [[1, 3], [1, 4], [1, 5]]
 pl2 = [[14, 2], [14, 3], [14, 4]]
-ballPosList = [[8, 4], [7, 4], [8, 3], [7, 3]]
-ballVelDic = [[1, 1], [-1, 1], [1, -1], [-1, -1]]
-ballPos = ballPosList[randint(0, 3)]
+ballPosList = [[8, 4], [7, 4]]
+ballVelDic = [[1, 1], [-1, 1]]
+ballPos = ballPosList[randint(0, 1)].copy()
 ballVelocity = ballVelDic[ballPosList.index(ballPos)]
+pl1Score = 0
+pl2Score = 0
 
 setMapPoint(ballPos, "X")
 print(ballPos)
