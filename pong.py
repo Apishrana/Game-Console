@@ -35,7 +35,7 @@ def updateBall():
         ballVelocity[0] = 1
     if nextX == 14 and any(p[1] == nextY for p in pl2):
         ballVelocity[0] = -1
-    setMapPoint(ballPos, "0")
+    setMapPoint(ballPos, " ")
     ballPos[0] += ballVelocity[0]
     ballPos[1] += ballVelocity[1]
     if ballPos[0] >= 15:
@@ -54,7 +54,7 @@ def updateBall():
 
 def movePl1(dir):
     for i in pl1:
-        setMapPoint(i, "0")
+        setMapPoint(i, " ")
     if dir == 0 and pl1[2][1] != 7:
         for i in range(3):
             pl1[i][1] += 1
@@ -65,7 +65,7 @@ def movePl1(dir):
 
 def movePl2(dir):
     for i in pl2:
-        setMapPoint(i, "0")
+        setMapPoint(i, " ")
     if dir == 0 and pl2[2][1] != 7:
         for i in range(3):
             pl2[i][1] += 1
@@ -76,7 +76,7 @@ def movePl2(dir):
 
 def setupBall():
     global ballPos, ballVelocity
-    setMapPoint(ballPos, "0")
+    setMapPoint(ballPos, " ")
     ballPos = ballPosList[randint(0, 1)].copy()
     ballVelocity = ballVelDic[ballPosList.index(ballPos)]
     print(ballPos)
@@ -104,10 +104,10 @@ def displayScore():
         setMapPoint([15 - i, 0], "9")
 
 
-gameMap = [["0" for i in range(16)] for i in range(8)]
+gameMap = [[" " for i in range(16)] for i in range(8)]
 gameOver = False
 pl1 = [[1, 3], [1, 4], [1, 5]]
-pl2 = [[14, 2], [14, 3], [14, 4]]
+pl2 = [[14, 3], [14, 4], [14, 5]]
 ballPosList = [[8, 4], [7, 4]]
 ballVelDic = [[1, 1], [-1, 1]]
 ballPos = ballPosList[randint(0, 1)].copy()

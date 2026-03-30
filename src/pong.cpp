@@ -24,7 +24,7 @@ int gameMapPong[8][16] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 
 bool gameOverPong = false;
 int pl1[3][2] = {{1, 3}, {1, 4}, {1, 5}};
-int pl2[3][2] = {{14, 2}, {14, 3}, {14, 4}};
+int pl2[3][2] = {{14, 3}, {14, 4}, {14, 5}};
 int pl1Score = 0;
 int pl2Score = 0;
 int ballPosList[4][2] = {{8, 4}, {7, 4}, {8, 3}, {7, 3}};
