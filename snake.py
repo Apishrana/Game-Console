@@ -119,6 +119,14 @@ while not gameOver:
     updatePlayer()
     printMap()
     # sleep(0.7)
-    playerDirection = int(input())
+    inp = input()
+    if inp == "w":
+        playerDirection = 1
+    if inp == "s":
+        playerDirection = 2
+    if inp == "a":
+        playerDirection = 3
+    if inp == "d":
+        playerDirection = 4
 
     checkDeath()
