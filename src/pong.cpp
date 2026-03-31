@@ -6,8 +6,8 @@ void setMapPointPong();
 void printMapPong();
 void playerSetupPong();
 void updateBallPong();
-void movePl1();
-void movePl2();
+void movePl1Pong();
+void movePl2Pong();
 void loopPong();
 void setupPong();
 void playerScorePong(int player);
@@ -21,16 +21,15 @@ int gameMapPong[8][16] = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                           {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-
 bool gameOverPong = false;
 int pl1[3][2] = {{1, 3}, {1, 4}, {1, 5}};
 int pl2[3][2] = {{14, 3}, {14, 4}, {14, 5}};
-int pl1Score = 0;
-int pl2Score = 0;
-int ballPosList[4][2] = {{8, 4}, {7, 4}, {8, 3}, {7, 3}};
-int ballVelList[4][2] = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
-int ballPos[2];
-int ballVelocity[2];
+int pl1ScorePong = 0;
+int pl2ScorePong = 0;
+int ballPosListPong[4][2] = {{8, 4}, {7, 4}, {8, 3}, {7, 3}};
+int ballVelListPong[4][2] = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}};
+int ballPosPong[2];
+int ballVelocityPong[2];
 
 void setMapPointPong(int pos[2], int val) { gameMapPong[pos[1]][pos[0]] = val; }
 
@@ -63,101 +62,102 @@ void playerSetupPong() {
 }
 
 void updateBallPong() {
-  int nextBallPos[2] = {ballPos[0] + ballVelocity[0],
-                        ballPos[1] + ballVelocity[1]};
+  int nextballPosPong[2] = {ballPosPong[0] + ballVelocityPong[0],
+                        ballPosPong[1] + ballVelocityPong[1]};
   for (int (&i)[2] : pl1) {
-    if (i == nextBallPos) {
-      ballVelocity[0] = 1;
+    if (i == nextballPosPong) {
+      ballVelocityPong[0] = 1;
       break;
     }
   }
   for (int (&i)[2] : pl2) {
-    if (i == nextBallPos) {
-      ballVelocity[0] = 1;
+    if (i == nextballPosPong) {
+      ballVelocityPong[0] = 1;
       break;
     }
   }
-  setMapPointPong(ballPos, 0);
-  ballPos[0] += ballVelocity[0];
-  ballPos[1] += ballVelocity[1];
-  setMapPointPong(ballPos, 1);
-  if (ballPos[0] >= 15) {
+  setMapPointPong(ballPosPong, 0);
+  ballPosPong[0] += ballVelocityPong[0];
+  ballPosPong[1] += ballVelocityPong[1];
+  setMapPointPong(ballPosPong, 1);
+  if (ballPosPong[0] >= 15) {
     playerScorePong(1);
     return;
   }
-  if (ballPos[0] <= 0) {
+  if (ballPosPong[0] <= 0) {
     playerScorePong(2);
     return;
   }
-  if (ballPos[1] == 7) {
-    ballVelocity[1] = -1;
+  if (ballPosPong[1] == 7) {
+    ballVelocityPong[1] = -1;
   }
-  if (ballPos[1] == 1) {
-    ballVelocity[1] = 1;
+  if (ballPosPong[1] == 1) {
+    ballVelocityPong[1] = 1;
   }
 }
 
-void movePl1(char dir) {
+void movePl1Pong(char dir) {
   for (int (&i)[2] : pl1) {
     setMapPointPong(i, 0);
   }
   if (dir == 'u' && pl1[2][1] != 7) {
-    for (int i; i < 4; i++) {
+    for (int i; i < 3; i++) {
       pl1[i][1] += 1;
     }
   } else if (dir == 'd' && pl1[0][1] != 0) {
-    for (int i; i < 4; i++) {
+    for (int i; i < 3; i++) {
       pl1[i][1] -= 1;
     }
   }
 }
 
-void movePl2(char dir) {
+void movePl2Pong(char dir) {
   for (int (&i)[2] : pl2) {
     setMapPointPong(i, 0);
   }
   if (dir == 'u' && pl2[2][1] != 7) {
-    for (int i; i < 4; i++) {
+    for (int i; i < 3; i++) {
       pl2[i][1] += 1;
     }
   } else if (dir == 'd' && pl2[0][1] != 0) {
-    for (int i; i < 4; i++) {
+    for (int i; i < 3; i++) {
       pl2[i][1] -= 1;
     }
   }
 }
+
 void setupPong() {
   int randBallIndex = random(0, 3);
-  setMapPointPong(ballPos, 0);
-  ballPos[0] = ballPosList[randBallIndex][0];
-  ballPos[1] = ballPosList[randBallIndex][1];
-  ballVelocity[0] = ballVelList[randBallIndex][0];
-  ballVelocity[1] = ballVelList[randBallIndex][1];
-  setMapPointPong(ballPos, 1);
+  setMapPointPong(ballPosPong, 3);
+  ballPosPong[0] = ballPosListPong[randBallIndex][0];
+  ballPosPong[1] = ballPosListPong[randBallIndex][1];
+  ballVelocityPong[0] = ballVelListPong[randBallIndex][0];
+  ballVelocityPong[1] = ballVelListPong[randBallIndex][1];
+  setMapPointPong(ballPosPong, 1);
 }
 
 void playerScorePong(int player) {
   if (player == 1) {
-    pl1Score += 1;
+    pl1ScorePong += 1;
   }
   if (player == 2) {
-    pl2Score += 1;
+    pl2ScorePong += 1;
   }
   setupPong();
   displayScore();
-  if (pl1Score == 9) {
+  if (pl1ScorePong == 9) {
     gameOverPong = true;
   }
-  if (pl2Score == 9) {
+  if (pl2ScorePong == 9) {
     gameOverPong = true;
   }
 }
 void displayScore() {
-  for (int i; i < pl1Score; i++) {
+  for (int i; i < pl1ScorePong; i++) {
     int x[2] = {i, 0};
     setMapPointPong(x, 9);
   }
-  for (int i; i < pl2Score; i++) {
+  for (int i; i < pl2ScorePong; i++) {
     int x[2] = {15 - i, 0};
     setMapPointPong(x, 8);
   }
@@ -171,17 +171,17 @@ void loopPong() {
     delay(700);
 
     if (digitalRead(UpbuttonPin)) {
-      movePl1('u');
+      movePl1Pong('u');
     }
     if (digitalRead(DownbuttonPin)) {
-      movePl1('d');
+      movePl1Pong('d');
     }
     int jsV = analogRead(JoystickVPin);
     if (jsV < 400) {
-      movePl2('u');
+      movePl2Pong('u');
     }
     if (jsV > 700) {
-      movePl2('d');
+      movePl2Pong('d');
     }
   } else {
     setScreen('g');
