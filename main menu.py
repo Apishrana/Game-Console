@@ -252,8 +252,13 @@ bitmap = {
 
 ui = [[0 for i in range(16)] for i in range(8)]
 uiBuffer = []
+gameIconRow = [[" " for i in range(16)] for i in range(3)]
 offset = 0
 uiBufferWidth = 0
+frame = 0
+blinkFrame = 4  # const
+blinkOn = True
+selectedIconIndex = 1
 
 
 def printMap():
@@ -283,12 +288,43 @@ def FillUiTextBuffer(text):
     uiBufferWidth = len(uiBuffer)
 
 
+def buildIcons():
+    global gameIconRow
+    for i in range(3):
+        for j in range(16):
+            gameIconRow[i][j] = " "
+    for i in range(4):
+        if i == selectedIconIndex:
+            if blinkOn:
+                for y in range(3):
+                    # if y != 1:
+                    #     gameIconRow[y][i * 3 + 3] = "X"
+                    # else:
+                    for x in range(3):
+                        gameIconRow[y][i * 3 + 2 + x] = "X"
+            else:
+                gameIconRow[1][i * 3 + 3] = "X"
+        else:
+            gameIconRow[1][i * 3 + 3] = "X"
+
+
+def renderIcons():
+    global ui
+    for i in range(3):
+        ui[i] = gameIconRow[i]
+
+
 FillUiTextBuffer("Apish")
 
 while True:
+    if frame == blinkFrame - 1:
+        blinkOn = not blinkOn
     for i in range(16):
         for j in range(5):
             ui[j + 3][i] = uiBuffer[(offset + i) % uiBufferWidth][j]
+    buildIcons()
+    renderIcons()
     printMap()
     sleep(0.25)
     offset = (offset + 1) % uiBufferWidth
+    frame = (frame + 1) % blinkFrame
