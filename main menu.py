@@ -253,7 +253,7 @@ bitmap = {
 ui = [[0 for i in range(16)] for i in range(8)]
 uiBuffer = []
 offset = 0
-width = 0
+uiBufferWidth = 0
 
 
 def printMap():
@@ -266,7 +266,7 @@ def printMap():
 
 
 def FillUiTextBuffer(text):
-    global width
+    global uiBufferWidth
     uiBuffer.clear()
     uiBuffer.extend([[" ", " ", " ", " ", " "] for i in range(3)])
     print(text)
@@ -280,7 +280,7 @@ def FillUiTextBuffer(text):
             uiBuffer.append(a)
         uiBuffer.append([" ", " ", " ", " ", " "])
     uiBuffer.extend([[" ", " ", " ", " ", " "] for i in range(2)])
-    width = len(uiBuffer)
+    uiBufferWidth = len(uiBuffer)
 
 
 FillUiTextBuffer("Apish")
@@ -288,7 +288,7 @@ FillUiTextBuffer("Apish")
 while True:
     for i in range(16):
         for j in range(5):
-            ui[j + 3][i] = uiBuffer[(offset + i) % width][j]
+            ui[j + 3][i] = uiBuffer[(offset + i) % uiBufferWidth][j]
     printMap()
     sleep(0.25)
-    offset = (offset + 1) % width
+    offset = (offset + 1) % uiBufferWidth
