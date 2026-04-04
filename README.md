@@ -6,15 +6,21 @@ This is a simple 16x8 game console built using a [WS2812 64 Bit RGB LED Matrix](
 
 The current repository includes:
 
-- Arduino code for the [console](./src/main.cpp) and 3 games
+- Arduino cpp code for the [Console](./src/main.cpp), [Game Menu screen](./src/mainMenu.cpp), [Game Over screen](./src/gameover.cpp) and 4 games
     - [Flappy Bird](./src/flapy.cpp)
     - [Snake](./src/sneak.cpp)
     - [Pong](./src/pong.cpp)
+    - [BreakOut](./src/breakout.cpp)
 
 - The games in python
-    - [Flappy Bird](./flapy.py)
-    - [Snake](./snake.py)
-    - [Pong](./pong.py)
+    - [Flappy Bird](./python%20test%20code/flapy.py)
+    - [Snake](./python%20test%20code/snake.py)
+    - [Pong](./python%20test%20code/pong.py)
+    - [BreakOut](./python%20test%20code/breakout.py)
+
+- Game menu in python
+    - [Game Menu screen](./python%20test%20code/main%20menu.py)
+    - [Game Over screen](./python%20test%20code/gameover%20screen.py)
 
 - A [Fritzing](https://fritzing.org/) design for wiring in `design.fzz`
 - A Fusion360 design of Console
@@ -28,7 +34,7 @@ The main goal was to learn how to use led matrix as a display, learning how to m
 - 16x8 display
 - Joystick-based input along with buttons
 - Passive buzzer for sound output
-- 3 games
+- 4 games
 
 ## How It Works
 
@@ -65,7 +71,7 @@ Input
 
 - Breadboard
 
-![img](https://stasis.hackclub-assets.com/images/1774862434956-t09pjd.png)
+![img](https://stasis.hackclub-assets.com/images/1775311460432-72qy7x.png)
 
 - Schematic
 
@@ -92,22 +98,31 @@ This project currently uses wiring-based electronics using a breadboard, not a P
 ├── README.md
 ├── cad
 ├── design.fzz
-├── flapy.py
 ├── include
 │   ├── README
 │   └── connsol_utils.h
 ├── lib
 │   └── README
 ├── platformio.ini
-├── pong.py
-├── snake.py
+├── python test code
+│   ├── breakout.py
+│   ├── flapy.py
+│   ├── gameover screen.py
+│   ├── main menu.py
+│   ├── pong.py
+│   └── snake.py
 ├── src
+│   ├── breakout.cpp
 │   ├── flapy.cpp
+│   ├── gameover.cpp
 │   ├── main.cpp
+│   ├── mainMenu.cpp
 │   ├── pong.cpp
 │   └── sneak.cpp
 └── test
     └── README
+
+7 directories, 20 files
 ```
 
 ## How to setup your own Console
