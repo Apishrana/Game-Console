@@ -4,6 +4,11 @@ struct Point {
   int x;
   int y;
 };
+struct CharBitmap {
+  char key;
+  int width;
+  int bitmap[5][5];
+};
 
 inline bool operator==(const Point &a, const Point &b) {
   return a.x == b.x && a.y == b.y;

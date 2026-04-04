@@ -52,11 +52,11 @@ bitmap = {
         [" ", 1, 1, 1, " "],
     ],
     "h": [
-        [1, " ", " ", 1],
-        [1, " ", " ", 1],
-        [1, 1, 1, 1],
-        [1, " ", " ", 1],
-        [1, " ", " ", 1],
+        [1, " ", 1],
+        [1, " ", 1],
+        [1, 1, 1],
+        [1, " ", 1],
+        [1, " ", 1],
     ],
     "i": [
         [1, 1, 1],
@@ -256,7 +256,7 @@ gameIconRow = [[" " for i in range(16)] for i in range(3)]
 offset = 0
 uiBufferWidth = 0
 frame = 0
-blinkFrame = 4 
+blinkFrame = 4
 blinkOn = True
 selectedIconIndex = 1
 
