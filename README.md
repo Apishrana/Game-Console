@@ -133,3 +133,14 @@ This project currently uses wiring-based electronics using a breadboard, not a P
 - Assemble your console
 
 ## BOM
+
+The full CSV BOM is in [BOM.csv](BOM.csv). Current estimated total: **₹ 1,000**.
+
+| Name                                                                     | Purpose                             | Quantity | Total Cost (USD) | Link                                                                                                      | Distributor |
+| ------------------------------------------------------------------------ | ----------------------------------- | -------- | ---------------- | --------------------------------------------------------------------------------------------------------- | ----------- |
+| PCB Mounted Passive Buzzer Module                                        | for sound output                    | 1        | 0.25             | [link](https://robu.in/product/pcb-mounted-passive-buzzer-module/)                                        | robu.in     |
+| 18650 x 2 battery holder with cover and On/Off Switch                    | battery holder for battery          | 1        | 0.54             | [link](https://robu.in/product/18650-x-2-battery-holder-with-cover-and-on-off-switch/)                    | robu.in     |
+| CJMCU 64 Bit 8×8 RGB LED Driver Development Board                        | 2 8X8 led matrix for a 16X8 display | 2        | 3.04             | [link](https://robu.in/product/cjmcu-64-bit-8x8-rgb-led-driver-development-board/)                        | robu.in     |
+| Uno R3 Board without Cable compatible with Arduino                       | Arduino to controlle the console    | 1        | 5.02             | [link](https://robu.in/product/arduino-uno-r3-without-cable/)                                             | robu.in     |
+| 6 x 8 cm Universal PCB Prototype Board Single-Sided 2.54mm Hole Pitch    | soldering togather the components   | 1        | 0.35             | [link](https://robu.in/product/6-x-8-cm-universal-pcb-prototype-board-single-sided-2-54mm-hole-pitch/)    | robu.in     |
+| Green Electronic Building Blocks Big Key Button Module High Level Output | Button for user input               | 4        | 1.44             | [link](https://robu.in/product/green-electronic-building-blocks-big-key-button-module-high-level-output/) | robu.in     |
