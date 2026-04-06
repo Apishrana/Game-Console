@@ -85,7 +85,15 @@ to be added latter
 
 the car 3d model can be found in [cad/](cad/)
 
-also on fusion [here]()
+also on fusion [here](https://a360.co/48l5qyz)
+
+### side
+
+![Screenshot 2026-04-06 at 11.36.19 PM](https://stasis.hackclub-assets.com/images/1775498784965-xtz3rr.png)
+
+### top
+
+![Screenshot 2026-04-06 at 11.36.58 PM](https://stasis.hackclub-assets.com/images/1775498822915-ihjmky.png)
 
 ## PCB
 
